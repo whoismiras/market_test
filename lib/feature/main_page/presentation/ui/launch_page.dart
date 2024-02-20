@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:market_test/core/config/theme.dart';
-import 'package:market_test/core/widgets/app_hbox_widget.dart';
 import 'package:market_test/feature/favourites_page/presentation/ui/favourites_page.dart';
 import 'package:market_test/feature/main_page/presentation/ui/widgets/main_page_tabbar.dart';
 import 'package:market_test/feature/main_page/presentation/ui/widgets/search_widget.dart';
@@ -19,6 +18,7 @@ class _LaunchPageState extends State<LaunchPage> with SingleTickerProviderStateM
   @override
   void initState() {
     _tabController = TabController(vsync: this, length: 2);
+
     super.initState();
   }
 

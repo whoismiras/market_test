@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:market_test/feature/main_page/presentation/ui/launch_page.dart';
+import 'package:market_test/core/utils/di_locator.dart' as di_locator;
 
-void main() {
+Future<void> main() async {
   Widget screen = const LaunchPage();
+  await di_locator.initLocator();
   runApp( MarketTest(screen: screen));
 }
 
