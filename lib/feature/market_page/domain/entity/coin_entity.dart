@@ -22,6 +22,16 @@ class CoinEntity{
         iconUrl: dto.iconUrl ?? CoreConstants.empty,
       );
 
+  CoinModelDto toDto() {
+    return CoinModelDto(
+      id: id,
+      name: name,
+      tag: tag,
+      price: price,
+      iconUrl: iconUrl,
+    );
+  }
+
   static List<CoinEntity> fromDtoList(List<CoinModelDto> dtoList) {
     return dtoList.map(CoinEntity.fromDto).toList();
   }

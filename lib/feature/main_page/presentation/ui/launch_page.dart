@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_test/core/config/theme.dart';
 import 'package:market_test/feature/favourites_page/presentation/ui/favourites_page.dart';
 import 'package:market_test/feature/main_page/presentation/ui/widgets/main_page_tabbar.dart';
-import 'package:market_test/feature/main_page/presentation/ui/widgets/search_widget.dart';
+import 'package:market_test/feature/search/presentation/ui/search_widget.dart';
 import 'package:market_test/feature/market_page/presentation/ui/market_page.dart';
 
 class LaunchPage extends StatefulWidget {
@@ -24,32 +24,31 @@ class _LaunchPageState extends State<LaunchPage> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.primary,
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-toolbarHeight: 80,
+        toolbarHeight: 80,
         automaticallyImplyLeading: false,
         title: const SearchWidget(),
       ),
-      body:   Column(
+      body: Column(
         children: [
-          MainPageTabBar(
-            controller: _tabController
-          ),
+          MainPageTabBar(controller: _tabController),
           Expanded(
             child: TabBarView(
+              physics: const AlwaysScrollableScrollPhysics(),
               controller: _tabController,
-              children: [
-              MarketPage(),
-              FavouritesPage(),
-            ],),
+              children: const [
+                MarketBuilder(),
+                FavouritesPage(),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
-
 
   @override
   void dispose() {

@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 /// coin model dto object
 class CoinModelDto {
   CoinModelDto({
@@ -16,6 +18,18 @@ class CoinModelDto {
     price = json['price'] as String?;
     iconUrl = json['icon'] as String?;
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'tag': tag,
+      'price': price,
+      'icon': iconUrl,
+    };
+  }
+
+  String toJson() => json.decode(toMap().toString());
 
    num? id;
    String? name;

@@ -5,7 +5,7 @@
       "name": "Tether",
       "tag": "USDT",
       "price": "0.92761",
-      "icon": "https://worldvectorlogo.com/logo/tether"
+      "icon": "https://cdn.worldvectorlogo.com/logos/tether.svg"
 
     },
     {
@@ -13,28 +13,28 @@
       "name": "Bitcoin",
       "tag": "BTC",
       "price": "27448.70",
-      "icon": "https://worldvectorlogo.com/logo/bitcoin"
+      "icon": "https://cdn.worldvectorlogo.com/logos/bitcoin.svg"
     }  ,
     {
       "id": 3,
       "name": "Ethereum",
       "tag": "ETH",
       "price": "1448.50",
-      "icon": "https://worldvectorlogo.com/logo/ethereum-eth"
+      "icon": "https://cdn.worldvectorlogo.com/logos/ethereum-eth.svg"
     },
     {
       "id": 4,
       "name": "S&P500",
       "tag": "GSPC",
       "price": "125.4",
-      "icon": "https://worldvectorlogo.com/logo/s-p-1"
+      "icon": "https://cdn.worldvectorlogo.com/logos/s-p-1.svg"
     },
     {
       "id": 5,
       "name": "APPLE",
       "tag": "AAPL",
       "price": "1021.40",
-      "icon": "https://worldvectorlog o.com/logo/apple-14"
+      "icon": "https://cdn.worldvectorlogo.com/logos/apple-14.svg"
     }
   ]
 }

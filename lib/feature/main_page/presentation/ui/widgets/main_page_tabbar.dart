@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:market_test/core/config/theme.dart';
 
-class MainPageTabBar extends StatelessWidget {
-  const MainPageTabBar({super.key,
+class MainPageTabBar extends StatefulWidget {
+  const MainPageTabBar({
+    super.key,
     required this.controller,
   });
+
   final TabController controller;
+
+  @override
+  State<MainPageTabBar> createState() => _MainPageTabBarState();
+}
+
+class _MainPageTabBarState extends State<MainPageTabBar> {
   @override
   Widget build(BuildContext context) {
-    const isSelected = true;
     return Container(
-      decoration:  BoxDecoration(
+      decoration: BoxDecoration(
         border: Border.all(color: Colors.white),
         borderRadius: BorderRadius.circular(16),
       ),
@@ -24,11 +31,10 @@ class MainPageTabBar extends StatelessWidget {
               dividerColor: Colors.transparent,
               indicatorColor: Colors.transparent,
               indicatorWeight: 0.1,
-              controller: controller,
-              unselectedLabelColor: Colors.white,
-              unselectedLabelStyle:const TextStyle(
+              controller: widget.controller,
+              unselectedLabelStyle: const TextStyle(
                 fontSize: 14,
-                color: Colors.white,
+                color: AppColors.primary,
                 fontWeight: FontWeight.w400,
               ),
               labelStyle: const TextStyle(
@@ -36,19 +42,17 @@ class MainPageTabBar extends StatelessWidget {
                 color: AppColors.primary,
                 fontWeight: FontWeight.w400,
               ),
-              labelColor: isSelected ? AppColors.primary : Colors.white,
-              tabs:  [
-                Container(
-                  color: Colors.white,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.auto_graph_rounded),
-                      Tab(
-                        text: 'All',
-                      ),
-                    ],
-                  ),
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.white,
+              tabs: [
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.auto_graph_rounded),
+                    Tab(
+                      text: 'All',
+                    ),
+                  ],
                 ),
                 Container(
                   color: AppColors.primary,
@@ -56,14 +60,12 @@ class MainPageTabBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.star_border_outlined),
-
                       Tab(
-                        text:'Favourites',
+                        text: 'Favourites',
                       ),
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
