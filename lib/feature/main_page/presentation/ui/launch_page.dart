@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:market_test/core/config/theme.dart';
 import 'package:market_test/feature/favourites_page/presentation/ui/favourites_page.dart';
 import 'package:market_test/feature/main_page/presentation/ui/widgets/main_page_tabbar.dart';
-import 'package:market_test/feature/search/presentation/ui/search_widget.dart';
+import 'package:market_test/feature/market_page/presentation/ui/widget/search_widget.dart';
 import 'package:market_test/feature/market_page/presentation/ui/market_page.dart';
 
 class LaunchPage extends StatefulWidget {
@@ -39,9 +39,9 @@ class _LaunchPageState extends State<LaunchPage> with SingleTickerProviderStateM
             child: TabBarView(
               physics: const AlwaysScrollableScrollPhysics(),
               controller: _tabController,
-              children: const [
-                MarketBuilder(),
-                FavouritesPage(),
+              children:  [
+                MarketPage(),
+                const FavouritesPage(),
               ],
             ),
           ),

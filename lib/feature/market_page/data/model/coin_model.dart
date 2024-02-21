@@ -12,7 +12,7 @@ class CoinModelDto {
 });
 
   CoinModelDto.fromJson(Map<String, dynamic> json) {
-    id = json['id'] as num?;
+    id = json['id'] as int?;
     name = json['name'] as String?;
     tag = json['tag'] as String?;
     price = json['price'] as String?;
@@ -29,9 +29,9 @@ class CoinModelDto {
     };
   }
 
-  String toJson() => json.decode(toMap().toString());
+  String toJson() => json.encode(toMap().toString());
 
-   num? id;
+   int? id;
    String? name;
    String? tag;
    String? price;

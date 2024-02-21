@@ -1,16 +1,16 @@
 part of 'favourites_cubit.dart';
 
-class FavouritesInitial extends Equatable {
+class FavouritesState extends Equatable {
   final List<CoinEntity> coinList;
 
-  const FavouritesInitial({
+  const FavouritesState({
     required this.coinList,
   });
 
-  FavouritesInitial copyWith({
+  FavouritesState copyWith({
     List<CoinEntity>? coinList,
   }) {
-    return FavouritesInitial(
+    return FavouritesState(
       coinList: coinList ?? this.coinList,
     );
   }

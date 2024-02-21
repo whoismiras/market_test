@@ -8,30 +8,39 @@ class FavouritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FavouritesCubit()..getFavouritesList(),
-      child: BlocBuilder<FavouritesCubit, FavouritesInitial>(
-        builder: (context, state) {
-          return Container(
-            margin: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: Colors.grey,
+    return BlocBuilder<FavouritesCubit, FavouritesState>(
+      builder: (context, state) {
+        return Container(
+          margin: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: Colors.white,
+          ),
+          child: RefreshIndicator.adaptive(
+            onRefresh: () async {
+              context.read<FavouritesCubit>().getFavouritesList();
+              await Future.delayed(const Duration(milliseconds: 300));
+            },
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: state.coinList.isEmpty
+                  ? const Center(child: Text('List is empty'))
+                  : ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(
+                        parent: BouncingScrollPhysics(),
+                      ),
+                      itemCount: state.coinList.length,
+                      itemBuilder: (context, index) {
+                        final item = state.coinList.elementAt(index);
+                        return CoinItemWidget(
+                          coin: item,
+                          onTap: () {},
+                        );
+                      }),
             ),
-            child: ListView.builder(
-                itemCount: state.coinList.length,
-                itemBuilder: (context, index) {
-                  final item = state.coinList.elementAt(index);
-                  return CoinItemWidget(
-                    icon: item.iconUrl,
-                    name: item.name,
-                    price: item.price,
-                    onTap: () {},
-                  );
-                }),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -16,4 +16,7 @@ class FavouritesUseCase {
   Future<void> save(CoinEntity value) async {
     return await _repository.saveCoinModel(value.toDto());
   }
+  Future<void> remove(CoinEntity value) async {
+    return await _repository.removeCoinModel(value.toDto());
+  }
 }

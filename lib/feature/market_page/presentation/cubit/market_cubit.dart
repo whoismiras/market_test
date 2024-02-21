@@ -7,20 +7,48 @@ import 'package:market_test/feature/market_page/domain/use_case/coin_use_case.da
 part 'market_state.dart';
 
 class MarketCubit extends Cubit<MarketCommonState> {
-  MarketCubit() :
-  _coinRepository = sl(),
-        super(const MarketCommonState(coinList: [], isLoading: true,),);
+  MarketCubit()
+      : _coinRepository = sl(),
+        super(const MarketCommonState(
+          coinList: [],
+          isLoading: true,
+        ));
 
   final GetCoinInfoUseCase _coinRepository;
 
   Future<void> getCoinList() async {
-    final request = _coinRepository.execute();
+    emit(state.copyWith(isLoading: true));
 
-    emit(
-      state.copyWith(
-        isLoading: false,
-            coinList:await request,
-      )
+    final request = await _coinRepository.execute();
+
+    emit(state.copyWith(
+      isLoading: false,
+      coinList: request,
+    ));
+  }
+
+  Future<void> onSearch(String? search) async {
+    if (search?.isEmpty ?? true) {
+      return emit(state.copyWith(
+        searchResults: [],
+      ));
+    }
+
+    String query = search!.toLowerCase();
+    final bool isMatching = state.coinList.any(
+      (coin) => coin.name.toLowerCase().contains(query),
     );
+    if (!isMatching) {
+      return emit(state.copyWith(
+        searchResults: [],
+      ));
+    }
+    return emit(state.copyWith(
+      searchResults: state.coinList
+          .where(
+            (coin) => coin.name.toLowerCase().contains(query),
+          )
+          .toList(),
+    ));
   }
 }

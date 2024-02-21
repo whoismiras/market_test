@@ -2,21 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:market_test/core/config/theme.dart';
+import 'package:market_test/feature/favourites_page/presentation/ui/favorite_icon_widget.dart';
+import 'package:market_test/feature/market_page/domain/entity/coin_entity.dart';
 
 /// row widget with detailed information for specific coin
 class CoinItemWidget extends StatelessWidget {
   const CoinItemWidget({
     super.key,
-    required this.icon,
-    required this.name,
-    required this.price,
+    required this.coin,
     required this.onTap,
   });
 
-  final String icon;
-  final String name;
-  final String price;
-  final Function() onTap;
+  final CoinEntity coin;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class CoinItemWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           SvgPicture.network(
-            icon,
+            coin.iconUrl,
             height: 50,
             fit: BoxFit.contain,
             placeholderBuilder: (_) {
@@ -39,7 +37,7 @@ class CoinItemWidget extends StatelessWidget {
           const SizedBox(width: 12.0),
           Expanded(
             child: Text(
-              name,
+              coin.name,
               textAlign: TextAlign.left,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.w500,
@@ -49,7 +47,7 @@ class CoinItemWidget extends StatelessWidget {
           const SizedBox(width: 50),
           Expanded(
             child: Text(
-              price,
+              coin.price,
               textAlign: TextAlign.right,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.w500,
@@ -57,11 +55,7 @@ class CoinItemWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12.0),
-          CupertinoButton(
-            onPressed: onTap,
-            padding: EdgeInsets.zero,
-            child: const Icon(Icons.star_border_outlined),
-          ),
+          FavoriteIconWidget(coin: coin),
         ],
       ),
     );

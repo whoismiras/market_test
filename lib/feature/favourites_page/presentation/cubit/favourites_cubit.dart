@@ -7,23 +7,28 @@ import 'package:market_test/feature/market_page/domain/entity/coin_entity.dart';
 part 'favourites_state.dart';
 
 /// favourites cubit
-class FavouritesCubit extends Cubit<FavouritesInitial> {
+class FavouritesCubit extends Cubit<FavouritesState> {
   FavouritesCubit()
-      : _favouritesRepository = sl(),
-        super(
-          const FavouritesInitial(coinList: []),
-        );
+      : _favouritesUseCase = sl(),
+        super(const FavouritesState(coinList: []));
 
-  final FavouritesUseCase _favouritesRepository;
+  final FavouritesUseCase _favouritesUseCase;
 
   Future<void> getFavouritesList() async {
-    final request = _favouritesRepository.execute();
+    final cachedCoins = await _favouritesUseCase.execute();
+
     emit(state.copyWith(
-      coinList: await request,
+      coinList: cachedCoins,
     ));
   }
 
   Future<void> saveCoin(CoinEntity value) async {
-    _favouritesRepository.save(value);
+    await _favouritesUseCase.save(value);
+    return getFavouritesList();
+  }
+
+  Future<void> removeCoin(CoinEntity value) async {
+    await _favouritesUseCase.remove(value);
+    return getFavouritesList();
   }
 }
